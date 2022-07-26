@@ -1,0 +1,5 @@
+<apex:page >
+	<div id="appWrapper">
+    </div>    
+    <apex:includeScript value="{!URLFOR($Resource.AppResource,'build/form-menu.min.js')}" loadOnReady="true" />
+</apex:page>
