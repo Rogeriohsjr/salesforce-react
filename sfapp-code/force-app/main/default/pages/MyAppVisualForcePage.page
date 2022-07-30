@@ -1,5 +1,6 @@
 <apex:page >
-	<div id="appWrapper">
-    </div>    
-    <apex:includeScript value="{!URLFOR($Resource.AppResource,'build/form-menu.min.js')}" loadOnReady="true" />
+    <h1>Test Visualforce Page</h1>
+	<div id="app">
+    </div>
+    <apex:includeScript value="{!URLFOR($Resource.AppResource,'index.bundle.js')}" loadOnReady="true" />
 </apex:page>
