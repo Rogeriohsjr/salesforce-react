@@ -31,7 +31,7 @@ export function ListAccount() {
 
   function callSalesforceCallBack(pResponse) {
     console.log("[callSalesforceCallBack] Starts...", pResponse);
-    dispatch(setList(pResponse[0]));
+    dispatch(setList(pResponse.result[0]));
   }
 
   return (
@@ -47,8 +47,8 @@ export function ListAccount() {
         <button onClick={() => dispatch(setFakeList())}>
           Set Fake Account List with Redux
         </button>
-        <button onClick={() => dispatch(getListOfAccounts())}>
-          Get List With Redux
+        <button onClick={() => dispatch({ type: "GET_ACCOUNT_LIST_ASYNC" })}>
+          Get List With Redux-Saga
         </button>
         <div>
           <ul>{getListOfAccountsLi()}</ul>

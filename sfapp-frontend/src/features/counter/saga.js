@@ -1,5 +1,7 @@
 import { put, takeEvery, all } from "redux-saga/effects";
-import { decrement, increment } from "./counterSlice";
+import salesforceAPI from "../salesforce/salesforce-api";
+import { increment } from "./counterSlice";
+import { setList } from "../salesforce/accountListSlice";
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -20,6 +22,23 @@ export function* watchIncrementAsync() {
   yield takeEvery("INCREMENT_ASYNC", incrementAsync);
 }
 
+export function* getListOfAccountFromSFAsync() {
+  console.log("[getListOfAccountFromSFAsync] Inside...");
+  const promise = new Promise((resolve) => {
+    console.log("[getListOfAccountFromSFAsync.Promise] Inside...");
+    salesforceAPI.getListOfAccountsAPI(resolve);
+  });
+
+  const { result } = yield promise;
+  console.log("[incrementAsync] After 3 seconds...", result);
+  yield put(setList(result[0]));
+}
+
+export function* watchGetListOfAccountAsync() {
+  console.log("[watchGetListOfAccountAsync] Inside...");
+  yield takeEvery("GET_ACCOUNT_LIST_ASYNC", getListOfAccountFromSFAsync);
+}
+
 export default function* rootSaga() {
-  yield all([helloSaga(), watchIncrementAsync()]);
+  yield all([helloSaga(), watchIncrementAsync(), watchGetListOfAccountAsync()]);
 }

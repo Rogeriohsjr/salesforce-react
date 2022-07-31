@@ -6,7 +6,7 @@ const salesforceAPI = {
       sfGlobalRemote.getListOfAccountURL,
       function (result, event) {
         console.log("[getListOfAccounts] Response", result, event);
-        pCallback(result);
+        pCallback({ result });
       },
       { escape: true }
     );
