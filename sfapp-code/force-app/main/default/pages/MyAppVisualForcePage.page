@@ -1,6 +1,11 @@
-<apex:page >
+<apex:page controller="AccountController">
     <h1>Test Visualforce Page</h1>
-	<div id="app">
+    <script>
+        var sfGlobalRemote = {};
+        sfGlobalRemote.getListOfAccountURL = '{!$RemoteAction.AccountController.getListOfAccount}';
+    </script>
+
+    <div id="app">
     </div>
     <apex:includeScript value="{!URLFOR($Resource.AppResource,'index.bundle.js')}" loadOnReady="true" />
 </apex:page>

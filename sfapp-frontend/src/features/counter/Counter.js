@@ -15,6 +15,12 @@ export function Counter() {
         >
           Increment
         </button>
+        <button
+          aria-label="Increment Async value"
+          onClick={() => dispatch({type: 'INCREMENT_ASYNC'})}
+        >
+          Increment ASYNC
+        </button>
         <span>{count}</span>
         <button
           aria-label="Decrement value"
