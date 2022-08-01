@@ -8,7 +8,7 @@ export const accountListSlice = createSlice({
   reducers: {
     setList: (state, action) => {
       state.listOfAccounts = [];
-      state.listOfAccounts.push(action.payload);
+      state.listOfAccounts.push(...action.payload);
     },
     setFakeList: (state) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
