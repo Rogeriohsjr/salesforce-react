@@ -1,11 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFakeList, cleanListOfAccounts } from "./accountListSlice";
+import { getAllAccounts } from "../views/account-view/account-list.actions";
+import { LIST_OF_ACCOUNTS } from "../views/account-view/account-list.selectors";
 
-export function ListAccount() {
-  const listOfAccount = useSelector(
-    (state) => state.accountStore.listOfAccounts
-  );
+const ListAccount = () : JSX.Element => {
+  const listOfAccount = useSelector(LIST_OF_ACCOUNTS);
   const dispatch = useDispatch();
 
   function getListOfAccountsLi() {
@@ -15,7 +14,7 @@ export function ListAccount() {
     }
     for (var i = 0; i < listOfAccount.length; i++) {
       menuItems.push(
-        <li key={i}>{listOfAccount[i].Id + " - " + listOfAccount[i].Name}</li>
+        <li key={i}>{listOfAccount[i].id + " - " + listOfAccount[i].name}</li>
       );
     }
     return menuItems;
@@ -25,13 +24,7 @@ export function ListAccount() {
     <div>
       <h1>List of Account</h1>
       <div>
-        <button onClick={() => dispatch(cleanListOfAccounts())}>
-          Clean List
-        </button>
-        <button onClick={() => dispatch(setFakeList())}>
-          Set Fake Account List with Redux
-        </button>
-        <button onClick={() => dispatch({ type: "GET_ACCOUNT_LIST_ASYNC" })}>
+        <button onClick={() => dispatch(getAllAccounts())}>
           Get List With Redux-Saga
         </button>
         <div>
@@ -40,4 +33,6 @@ export function ListAccount() {
       </div>
     </div>
   );
-}
+};
+
+export default ListAccount;
