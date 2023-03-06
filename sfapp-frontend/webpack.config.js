@@ -7,8 +7,9 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   entry: {
-    'account-page': { import: './src/pages/account-page/index.tsx', dependOn: 'vendors' },
+    'account-page': { import: './src/pages/account-page/index.tsx', dependOn: ['vendors', 'localhost-vendors'] },
     vendors: ['react', 'react-dom', 'redux-saga', '@reduxjs/toolkit', 'react-redux'],
+    'localhost-vendors': ['miragejs'],
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -43,7 +44,7 @@ module.exports = {
     //new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
-      chunks: ['vendors', 'account-page'],
+      chunks: ['localhost-vendors', 'vendors', 'account-page'],
       template: 'src/pages/account-page/index.html',
       filename: 'pages/account-page/index.html',
     }),
