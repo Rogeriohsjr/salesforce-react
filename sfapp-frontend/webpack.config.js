@@ -8,7 +8,7 @@ module.exports = {
   },
   entry: {
     'vendors-localhost': ['miragejs', '@faker-js/faker/locale/en'],
-    'vendors-react': { import: ['react', 'react-dom', 'redux-saga', '@reduxjs/toolkit', 'react-redux'], dependOn: 'vendors-localhost' },
+    'vendors-react': { import: ['react', 'react-dom', 'redux-saga', '@reduxjs/toolkit', 'react-redux', 'redux-saga/effects'], dependOn: 'vendors-localhost' },
     'account-page': { import: './src/pages/account-page/index.tsx', dependOn: 'vendors-react' },
   },
   output: {
