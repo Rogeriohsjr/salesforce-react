@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker/locale/en';
 import { Factory } from 'miragejs';
 import { FactoryDefinition, ModelDefinition } from 'miragejs/-types';
-import IAccountBaseDTO, { IAccountDTO } from '../../../account-api/dtos/account-response-dto';
+import { IAccountDTO } from '../../../account-api/dtos/account-response-dto';
 
 // MAKE SURE the first letter is lowerCase
 export const ACCOUNT_TABLE_NAME = 'accountTable';
@@ -17,7 +17,7 @@ export const AccountFactory: FactoryDefinition<IAccountDTO> = Factory.extend({
   },
 });
 
-export const SPECIFIC_SCENARIOS: IAccountDTO = {
+export const SPECIFIC_SCENARIO: IAccountDTO = {
   id: faker.datatype.uuid(),
   name: 'Formstack',
 };

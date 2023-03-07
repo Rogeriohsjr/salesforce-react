@@ -1,7 +1,7 @@
 import { createServer, Model, Registry, Server } from 'miragejs';
 import Schema from 'miragejs/orm/schema';
 import IAccountBaseDTO, { IAccountDTO } from '../account-api/dtos/account-response-dto';
-import { AccountFactory, AccountFactoryType, AccountModal, ACCOUNT_TABLE_NAME, SPECIFIC_SCENARIOS } from './factory/account-factory/account-factory';
+import { AccountFactory, AccountFactoryType, AccountModal, ACCOUNT_TABLE_NAME, SPECIFIC_SCENARIO } from './factory/account-factory/account-factory';
 
 type AppRegistry = Registry<
   {
@@ -25,7 +25,7 @@ export function makeServer({ environment = 'test', showLogging = true } = {}): S
     },
 
     seeds(pServer: Server<AppRegistry>) {
-      pServer.create(ACCOUNT_TABLE_NAME, SPECIFIC_SCENARIOS);
+      pServer.create(ACCOUNT_TABLE_NAME, SPECIFIC_SCENARIO);
       pServer.createList(ACCOUNT_TABLE_NAME, 10);
     },
 
