@@ -1,6 +1,6 @@
 import { createServer, Model, Registry, Server } from 'miragejs';
 import Schema from 'miragejs/orm/schema';
-import IAccountBaseDTO, { IAccountDTO } from '../account-api/dtos/account-response-dto';
+import { IAccountBaseDTO, IDeleteAccountBaseDTO } from '../account-api/dtos/account-response-dto';
 import { AccountFactory, AccountFactoryType, AccountModal, ACCOUNT_TABLE_NAME, SPECIFIC_SCENARIO } from './factory/account-factory/account-factory';
 
 type AppRegistry = Registry<
@@ -38,12 +38,21 @@ export function makeServer({ environment = 'test', showLogging = true } = {}): S
         const accountBase: IAccountBaseDTO = {
           listOfAccounts: [],
         };
-        
+
         listOfAccounts.forEach((fiAccount) => {
           accountBase.listOfAccounts.push(fiAccount.attrs);
         });
 
         return accountBase;
+      });
+
+      this.delete('/account/:id', (schema: AppSchema, request): IDeleteAccountBaseDTO => {
+        const accountId = request.params.id;
+
+        const form = schema.find(ACCOUNT_TABLE_NAME, accountId);
+        form.destroy();
+
+        return { isDeleted: true };
       });
     },
   });

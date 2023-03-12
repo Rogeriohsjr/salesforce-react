@@ -3,6 +3,10 @@ export interface IAccountDTO {
   name: string;
 }
 
-export default interface IAccountBaseDTO {
+export interface IAccountBaseDTO {
   listOfAccounts: IAccountDTO[];
+}
+
+export interface IDeleteAccountBaseDTO {
+  isDeleted: boolean;
 }
