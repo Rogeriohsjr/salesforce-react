@@ -6,6 +6,7 @@ import { IAccountBaseDTO, IDeleteAccountBaseDTO } from './dtos/account-response-
 
 export default class AccountAPI {
   public static getAllAccounts(): Promise<ISalesforceResponseAPI<IAccountBaseDTO, ISalesforceErrorDTO>> {
+    console.log('[getAllAccounts] Starts...');
     const promise = new Promise((resolve, rejected) => {
       if (window.Visualforce != undefined) {
         AccountSalesforceRemoteAction.getListOfAccount(resolve, rejected);
@@ -29,6 +30,7 @@ export default class AccountAPI {
   }
 
   public static deleteAccount(pAccountId: string): Promise<ISalesforceResponseAPI<IDeleteAccountBaseDTO, ISalesforceErrorDTO>> {
+    console.log('[deleteAccount] Starts...');
     const promise = new Promise((resolve, rejected) => {
       if (window.Visualforce != undefined) {
         AccountSalesforceRemoteAction.getListOfAccount(resolve, rejected);

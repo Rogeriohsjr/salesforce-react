@@ -3,6 +3,7 @@ import { IAccountBaseDTO, IDeleteAccountBaseDTO } from './dtos/account-response-
 
 export default class AccountSalesforceRemoteAction {
   public static getListOfAccount(pSuccessCallBack: (response: IAccountBaseDTO) => void, pErrorCallBack: (response: ISalesforceErrorDTO) => void): void {
+    console.log('[AccountSalesforceRemoteAction.getListOfAccount] Starts...');
     window.Visualforce.remoting.Manager.invokeAction(
       window.sfGlobalRemote.getListOfAccountURL,
       function (result: any, event: any) {
@@ -22,6 +23,7 @@ export default class AccountSalesforceRemoteAction {
     pSuccessCallBack: (response: IDeleteAccountBaseDTO) => void,
     pErrorCallBack: (response: ISalesforceErrorDTO) => void
   ): void {
+    console.log('[AccountSalesforceRemoteAction.deleteAccount] Starts...');
     window.Visualforce.remoting.Manager.invokeAction(
       window.sfGlobalRemote.deleteAccountURL,
       pAccountId,

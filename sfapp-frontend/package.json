@@ -4,17 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "webpack serve --mode development",
+    "serve": "webpack serve --mode development --env MIRAGE_ON=YES",
     "bigbang": "rm -rf node_modules/ && npm install && webpack --mode development",
-    "build": "webpack --mode development",
-    "build:test": "webpack --mode test",
-    "build:prod": "webpack --mode production"
+    "build": "webpack --mode production",
+    "build:sf": "webpack --mode development --env MIRAGE_ON=NO",
+    "build:prod": "webpack --mode production --env MIRAGE_ON=NO"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-typescript": "^7.21.0",
     "@reduxjs/toolkit": "^1.9.3",
+    "mini-css-extract-plugin": "^2.7.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
