@@ -1,36 +1,39 @@
 public with sharing class AppErrorResponse {
-    private List<SalesforceErrorDTO> listOfSalesforceErrors;
+  private List<SalesforceErrorDTO> listOfSalesforceErrors;
 
-    public AppErrorResponse(){
-        this.listOfSalesforceErrors = new List<SalesforceErrorDTO>();
-    }
+  public AppErrorResponse() {
+    this.listOfSalesforceErrors = new List<SalesforceErrorDTO>();
+  }
 
-    public AppErrorResponse addGeneralException(string pErroCode, Exception pGeneralException) {
-        string exceptionErrorMessage = pGeneralException.getMessage();
+  public AppErrorResponse addGeneralException(
+    string pErroCode,
+    Exception pGeneralException
+  ) {
+    string exceptionErrorMessage = pGeneralException.getMessage();
 
-        SalesforceErrorDTO error = new SalesforceErrorDTO(
-            pErroCode,
-            exceptionErrorMessage
-        );
+    SalesforceErrorDTO error = new SalesforceErrorDTO(
+      pErroCode,
+      exceptionErrorMessage
+    );
 
-        this.listOfSalesforceErrors.add(error);
+    this.listOfSalesforceErrors.add(error);
 
-        return this;
-    }
-    
-    public AppErrorResponse addAppException(AppException pAppException) {
-        string exceptionErrorMessage = pAppException.getMessage();
+    return this;
+  }
 
-        SalesforceErrorDTO error = new SalesforceErrorDTO(
-            exceptionErrorMessage.substringBefore(AppException.CODE_SEPARATOR),
-            exceptionErrorMessage.substringAfter(AppException.CODE_SEPARATOR)
-        );
-        this.listOfSalesforceErrors.add(error);
+  public AppErrorResponse addAppException(AppException pAppException) {
+    string exceptionErrorMessage = pAppException.getMessage();
 
-        return this;
-    }
+    SalesforceErrorDTO error = new SalesforceErrorDTO(
+      exceptionErrorMessage.substringBefore(AppException.CODE_SEPARATOR),
+      exceptionErrorMessage.substringAfter(AppException.CODE_SEPARATOR)
+    );
+    this.listOfSalesforceErrors.add(error);
 
-    /**
+    return this;
+  }
+
+  /**
    * This method should be used inside of Remote Action methods.
    * @exception This exception makes the message attribute in the RemoteAction response to be the message that we are sending in the Constructor.
    */
@@ -39,7 +42,7 @@ public with sharing class AppErrorResponse {
     throw new AppException.AppSystemException(errorMessageAsJSON);
   }
 
-    // Creating this class because it looks like more a Salesforce Class, so on the response we will support our error and salesforce error.
+  // Creating this class because it looks like more a Salesforce Class, so on the response we will support our error and salesforce error.
   // More Info: https://salesforce.stackexchange.com/a/161430
   public class SalesforceErrorDTO {
     public string errorCode { get; set; }
