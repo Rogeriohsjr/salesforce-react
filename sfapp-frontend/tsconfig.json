@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node16",
+    "module": "es6",
+    "target": "es6", 
+    "jsx": "react",
+    "rootDir": "src",
+    "outDir": "build",
+    "esModuleInterop": true,
+  },
+  "include": ["src"]
+}

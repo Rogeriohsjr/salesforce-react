@@ -1,32 +1,71 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-module.exports = {
-  // Where files should be sent once they are bundled
-  output: {
-    path: path.join(__dirname, "/build"),
-    filename: "index.bundle.js",
-  },
-  // webpack 5 comes with devServer which loads in development mode
-  devServer: {
-    port: 3000,
-    hot: true,
-  },
-  // Rules of how webpack will take our files, compile & bundle them for the browser
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /nodeModules/,
-        use: {
-          loader: "babel-loader",
+module.exports = (env) => {
+  return {
+    resolve: {
+      extensions: ['.tsx', '.ts', '.js'],
+    },
+    entry: {
+      'vendors-react': {
+        import: ['react', 'react-dom', 'redux-saga', '@reduxjs/toolkit', 'react-redux', 'redux-saga/effects', 'miragejs', '@faker-js/faker/locale/en'],
+      },
+      'account-page': { import: './src/pages/account-page/index.tsx', dependOn: 'vendors-react' },
+    },
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'pages/[name]/[name].js',
+      clean: true,
+    },
+    devServer: {
+      port: 3000,
+      hot: true,
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(ts|js)x?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
+            },
+          },
         },
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
+        {
+          test: /\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              // 2. Turns css into commonjs
+              loader: 'css-loader',
+              options: {
+                import: false,
+              },
+            },
+          ],
+        },
+      ],
+    },
+    plugins: [
+      //new BundleAnalyzerPlugin(),
+      new webpack.DefinePlugin({
+        'process.env.MIRAGE_ON': JSON.stringify(env.MIRAGE_ON),
+      }),
+      new HtmlWebpackPlugin({
+        inject: true,
+        chunks: ['vendors-localhost', 'vendors-react', 'account-page'],
+        template: 'src/pages/account-page/index.html',
+        filename: 'pages/account-page/index.html',
+      }),
+      // This plugin extracts CSS into separate files. It creates a CSS file per JS file which contains CSS. It supports On-Demand-Loading of CSS and SourceMaps.
+      new MiniCssExtractPlugin({
+        filename: 'pages/[name]/[name].css',
+      }),
     ],
-  },
-  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
+  };
 };

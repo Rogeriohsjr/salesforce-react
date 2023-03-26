@@ -1,11 +1,18 @@
 <apex:page controller="AccountController">
     <h1>Test Visualforce Page</h1>
+    <div id="react-account-page">
+    </div>
+
+    <apex:includeScript value="{!URLFOR($Resource.AppResource,'pages/vendors-react/vendors-react.js')}" loadOnReady="false" />
+    <apex:includeScript value="{!URLFOR($Resource.AppResource,'pages/account-page/account-page.js')}" loadOnReady="false" />
+    <apex:stylesheet value="{!URLFOR($Resource.AppResource,'pages/account-page/account-page.css')}" />
     <script>
         var sfGlobalRemote = {};
         sfGlobalRemote.getListOfAccountURL = '{!$RemoteAction.AccountController.getListOfAccount}';
-    </script>
+        sfGlobalRemote.deleteAccountByAccountIdURL = '{!$RemoteAction.AccountController.deleteAccountByAccountId}';
 
-    <div id="app">
-    </div>
-    <apex:includeScript value="{!URLFOR($Resource.AppResource,'index.bundle.js')}" loadOnReady="true" />
+        window.addEventListener('load', function () {
+            window.fsReact.addMainPage(document.getElementById('react-account-page'));
+        });
+    </script>
 </apex:page>

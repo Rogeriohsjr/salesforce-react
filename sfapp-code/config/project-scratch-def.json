@@ -1,5 +1,6 @@
 {
-  "orgName": "rogerio company",
+  "orgName": "React for Salesforce Example",
   "edition": "Developer",
+  "hasSampleData": true,
   "features": []
 }

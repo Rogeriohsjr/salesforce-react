@@ -1,10 +1,13 @@
 global with sharing class AccountController {
-    public AccountController() {
+    @RemoteAction
+    global static AccountDTOProvider.ListOfAccountBaseDTO getListOfAccount() {
+        AccountDTOProvider.ListOfAccountBaseDTO baseDTO = new AccountDTOProvider.ListOfAccountBaseDTO();
+        baseDTO = new AccountService().getListOfAllAccountsDTO();
+        return baseDTO;
     }
 
     @RemoteAction
-    global static List<Account> getListOfAccount() {
-        List<Account> listOfAccount = [SELECT Id, Name FROM Account];
-        return listOfAccount;
+    global static void deleteAccountByAccountId(String pAccountId) {
+        new AccountService().deleteAccountByAccountId(pAccountId);
     }
 }
