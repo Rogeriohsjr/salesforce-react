@@ -1,11 +1,18 @@
 .account-tile__container{
-  border: 1px solid red;
-  padding: 5px;
-  width: 200px;
+  border: 1px solid #9E9E9E;
+  padding: 10px;
+  width: 300px;
   height: 80px;
   display: flex;
-  margin: 5px;
+  margin: 10px;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .account-tile__title {
   font-size: 20px;
+  display: flex;
+}
+
+.account-list-of-actions {
+  display: flex;
 }

@@ -1,4 +1,19 @@
+.account-list__container {
+  display: flex;
+  width: 1400px;
+  margin: auto;
+  flex-direction: column;
+}
 
 .account-list__list-of-tiles {
   display: flex;
+  width: 1400px;
+  height: 500px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 20px;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
 }

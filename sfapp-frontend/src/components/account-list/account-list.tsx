@@ -15,8 +15,10 @@ const ListAccount = (): JSX.Element => {
 
   return (
     <div className="account-list__container">
-      <h1>List of Account</h1>
-      <div>
+      <div className="account_list__title">
+        <h1>List of Account</h1>
+      </div>
+      <div className="account_list__actions">
         <button onClick={() => dispatch(getAllAccounts())}>Refresh</button>
       </div>
       <div className="account-list__list-of-tiles">
