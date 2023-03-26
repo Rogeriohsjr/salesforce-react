@@ -4,6 +4,7 @@ import { IAccountBaseDTO, IDeleteAccountBaseDTO } from '../../../apis/account-ap
 import ISalesforceErrorDTO from '../../../apis/common/dtos/salesforce-error-dto';
 import { ISalesforceResponseAPI } from '../../../apis/salesforce-interface';
 import { IPayloadActionType } from '../../../classes/redux/common-action-types';
+import { showToastAlertAction } from '../../toast-alert/toast-alert.actions';
 import { setListOfAccountReducerAction } from './account-list-view.slice';
 import { ACCOUNT_LIST_ACTIONS } from './constants';
 
@@ -13,7 +14,7 @@ export function* loadAllAccountsSaga() {
   if (result.isSuccess) {
     yield put(setListOfAccountReducerAction(result.successResponse.listOfAccounts));
   } else {
-    // Error
+    yield put(showToastAlertAction(result.errorResponse));
   }
 }
 
@@ -24,7 +25,7 @@ export function* deleteAccountSaga(action: IPayloadActionType<string>) {
   if (result.isSuccess) {
     yield* loadAllAccountsSaga();
   } else {
-    // Error
+    yield put(showToastAlertAction(result.errorResponse));
   }
 }
 

@@ -21,3 +21,9 @@ export const SPECIFIC_SCENARIO: IAccountDTO = {
   id: faker.datatype.uuid(),
   name: 'Formstack',
 };
+
+
+export const ACCOUNT_ERROR_TO_DELETE_PERMISSION_DENIED: IAccountDTO = {
+  id: faker.datatype.uuid(),
+  name: faker.company.name() +  '- Error to Delete',
+};

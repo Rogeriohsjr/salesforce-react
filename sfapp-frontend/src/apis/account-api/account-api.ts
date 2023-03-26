@@ -47,8 +47,8 @@ export default class AccountAPI {
           isSuccess: true,
         };
       })
-      .catch((response: ISalesforceErrorDTO) => ({
-        errorResponse: response,
+      .catch((response: ISalesforceErrorDTO[]) => ({
+        errorResponse: response[0],
         isSuccess: false,
       }));
   }

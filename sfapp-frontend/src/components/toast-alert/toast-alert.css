@@ -1,0 +1,30 @@
+.alert_error__container {
+  border: 1px solid red;
+  display: flex;
+  margin: auto;
+  width: 400px;
+  background: red;
+  color: white;
+  font-family: sans-serif;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+}
+
+.alert_error__message-content {
+}
+
+.alert_error__message-code {
+  display: inline-flex;
+  margin-right: 5px;
+}
+
+.alert_error__message-text {
+  display: inline-flex;
+}
+
+.alert_error__message-action {
+}
