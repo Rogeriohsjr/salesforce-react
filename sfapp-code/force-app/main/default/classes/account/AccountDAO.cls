@@ -10,6 +10,14 @@ public with sharing class AccountDAO {
   }
 
   public void deleteListOfAccount(List<Account> pListOfAccount) {
+    if (Schema.SObjectType.Account.isDeletable()) {
+      new AppException()
+        .thrownErrorByCodeAndMessage(
+          'EPAC-01',
+          'You need to have delete permission in order to delete this account'
+        );
+    }
+
     delete pListOfAccount;
   }
 }

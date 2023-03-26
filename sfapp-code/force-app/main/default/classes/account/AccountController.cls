@@ -22,7 +22,7 @@ global with sharing class AccountController {
       new AppErrorResponse().addAppException(ex).thrownErrorOnRemoteAction();
     } catch (Exception ex) {
       new AppErrorResponse()
-        .addGeneralException('[GEAC01]', ex)
+        .addGeneralException('[GEAC02]', ex)
         .thrownErrorOnRemoteAction();
     }
   }
