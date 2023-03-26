@@ -31,8 +31,9 @@ export default class AccountSalesforceRemoteAction {
         if (event.statusCode == 200) {
           pSuccessCallBack(result);
         } else {
-          console.error('Error Calling Salesforce.', event, result);
-          pErrorCallBack(event);
+          console.error('[deleteAccount] Error Calling Salesforce.', event);
+          const parsed = JSON.parse(event.message);
+          pErrorCallBack(parsed);
         }
       },
       { escape: false }
