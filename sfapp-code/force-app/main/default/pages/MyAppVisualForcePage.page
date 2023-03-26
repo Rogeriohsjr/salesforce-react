@@ -9,6 +9,7 @@
     <script>
         var sfGlobalRemote = {};
         sfGlobalRemote.getListOfAccountURL = '{!$RemoteAction.AccountController.getListOfAccount}';
+        sfGlobalRemote.deleteAccountByAccountIdURL = '{!$RemoteAction.AccountController.deleteAccountByAccountId}';
 
         window.addEventListener('load', function () {
             window.fsReact.addMainPage(document.getElementById('react-account-page'));

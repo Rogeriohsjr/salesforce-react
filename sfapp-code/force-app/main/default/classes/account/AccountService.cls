@@ -17,4 +17,8 @@ public with sharing class AccountService {
 
         return baseDTO;
     }
+
+    public void deleteAccountByAccountId(Id pAccountId){
+        this.accountDAO.deleteAccountByAccountId(pAccountId);
+    }
 }

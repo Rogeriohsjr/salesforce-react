@@ -5,4 +5,9 @@ global with sharing class AccountController {
         baseDTO = new AccountService().getListOfAllAccountsDTO();
         return baseDTO;
     }
+
+    @RemoteAction
+    global static void deleteAccountByAccountId(String pAccountId) {
+        new AccountService().deleteAccountByAccountId(pAccountId);
+    }
 }

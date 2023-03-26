@@ -33,7 +33,7 @@ export default class AccountAPI {
     console.log('[deleteAccount] Starts...');
     const promise = new Promise((resolve, rejected) => {
       if (window.Visualforce != undefined) {
-        AccountSalesforceRemoteAction.getListOfAccount(resolve, rejected);
+        AccountSalesforceRemoteAction.deleteAccount(pAccountId, resolve, rejected);
       } else {
         let url = '/api/account/' + pAccountId;
         RestApi.delete<IDeleteAccountBaseDTO>(url, resolve, rejected);

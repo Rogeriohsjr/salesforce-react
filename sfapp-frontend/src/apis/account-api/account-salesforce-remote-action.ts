@@ -25,7 +25,7 @@ export default class AccountSalesforceRemoteAction {
   ): void {
     console.log('[AccountSalesforceRemoteAction.deleteAccount] Starts...');
     window.Visualforce.remoting.Manager.invokeAction(
-      window.sfGlobalRemote.deleteAccountURL,
+      window.sfGlobalRemote.deleteAccountByAccountIdURL,
       pAccountId,
       function (result: any, event: any) {
         if (event.statusCode == 200) {
