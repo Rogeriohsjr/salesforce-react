@@ -3,9 +3,21 @@ BGreen="\033[1;32m"
 TITLECOLOR=$BGreen
 NC='\033[0m' # No Color
 
+# Deploying using Prod config or dev Config for the React
 # deploy.sh sf
 # deploy.sh sf:prod
 deployTo=$1;
+
+# Create a Scratch Org or Not
+# deploy.sh sf:prod yes
+createNewOrg=$2;
+
+if [[ $createNewOrg == "yes" ]];
+then
+  echo "${TITLECOLOR}=== Creating new Scratch Org ===${NC}"
+  echo "Generating new Scratch Org...."
+  sfdx force:org:create -f config/project-scratch-def.json --setalias test-scr1 --durationdays 2 --setdefaultusername --json --noancestors --loglevel fatal
+fi
 
 echo "${TITLECOLOR}=== Building Frontend ===${NC}"
 cd ..
@@ -16,7 +28,6 @@ then
 else
   npm run build:sf
 fi
-
 
 echo "${TITLECOLOR}=== Moving the Frontend to Salesforce ===${NC}"
 cd ..
