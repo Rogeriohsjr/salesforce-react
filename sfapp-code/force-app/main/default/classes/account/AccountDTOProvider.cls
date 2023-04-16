@@ -10,8 +10,4 @@ global class AccountDTOProvider {
       this.listOfAccounts = new List<AccountDTO>();
     }
   }
-
-  global class DeleteAccountBaseDTO {
-    public Boolean isDeleted;
-  }
 }

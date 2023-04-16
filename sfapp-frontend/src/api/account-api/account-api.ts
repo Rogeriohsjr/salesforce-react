@@ -34,7 +34,7 @@ export default class AccountAPI {
     console.log('[deleteAccount] Starts...');
     const promise = new Promise((resolve, rejected) => {
       if (SalesforceContext.isSalesforceContext()) {
-        AccountSalesforceRemoteAction.deleteAccount(pAccountId, resolve, rejected);
+        AccountSalesforceRemoteAction.deleteAccount(pAccountId, rejected);
       } else {
         let url = '/api/account/' + pAccountId;
         RestApi.delete(url, resolve, rejected);
