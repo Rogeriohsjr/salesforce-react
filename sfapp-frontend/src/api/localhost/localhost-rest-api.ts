@@ -1,6 +1,6 @@
-import ISalesforceErrorDTO from './dtos/salesforce-error-dto';
+import ISalesforceErrorDTO from '../services/dtos/salesforce-error-dto';
 
-export default class RestApi {
+export default class LocalhostRestApi {
   public static get<T>(pEndpoint: string, pSuccessCallBack: (response: T) => void, pErrorCallBack: (response: ISalesforceErrorDTO) => void): void {
     // We will call function
     fetch(pEndpoint, {

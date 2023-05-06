@@ -1,7 +1,7 @@
 import ISalesforceErrorDTO from '../services/dtos/salesforce-error-dto';
-import RestApi from '../services/rest-api';
+import LocalhostRestApi from '../localhost/localhost-rest-api';
 import { APIResponseNoContentType, APIResponseType } from '../services/api-response-type';
-import AccountSalesforceRemoteAction from './account-salesforce-remote-action';
+import AccountSalesforceRemoteAction from './salesforce/account-salesforce-remote-action';
 import { IAccountBaseDTO } from './dtos/account-response-dto';
 import SalesforceContext from '../../services/salesforce/salesforce-context';
 
@@ -13,7 +13,7 @@ export default class AccountAPI {
         AccountSalesforceRemoteAction.getListOfAccount(resolve, rejected);
       } else {
         let url = '/api/account';
-        RestApi.get<IAccountBaseDTO>(url, resolve, rejected);
+        LocalhostRestApi.get<IAccountBaseDTO>(url, resolve, rejected);
       }
     });
 
@@ -37,7 +37,7 @@ export default class AccountAPI {
         AccountSalesforceRemoteAction.deleteAccount(pAccountId, rejected);
       } else {
         let url = '/api/account/' + pAccountId;
-        RestApi.delete(url, resolve, rejected);
+        LocalhostRestApi.delete(url, resolve, rejected);
       }
     });
 

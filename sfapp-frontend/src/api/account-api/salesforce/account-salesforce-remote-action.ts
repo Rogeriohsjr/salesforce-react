@@ -1,5 +1,5 @@
-import ISalesforceErrorDTO from '../services/dtos/salesforce-error-dto';
-import { IAccountBaseDTO } from './dtos/account-response-dto';
+import ISalesforceErrorDTO from '../../services/dtos/salesforce-error-dto';
+import { IAccountBaseDTO } from '../dtos/account-response-dto';
 
 export default class AccountSalesforceRemoteAction {
   public static getListOfAccount(pSuccessCallBack: (response: IAccountBaseDTO) => void, pErrorCallBack: (response: ISalesforceErrorDTO) => void): void {
@@ -11,7 +11,8 @@ export default class AccountSalesforceRemoteAction {
           pSuccessCallBack(result);
         } else {
           console.error('Error Calling Salesforce.', event, result);
-          pErrorCallBack(event);
+          const parsed = JSON.parse(event.message);
+          pErrorCallBack(parsed);
         }
       },
       { escape: false }
