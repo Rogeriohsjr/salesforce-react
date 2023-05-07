@@ -13,7 +13,7 @@ module.exports = (env) => {
       'vendors-react': {
         import: ['react', 'react-dom', 'redux-saga', '@reduxjs/toolkit', 'react-redux', 'redux-saga/effects', 'miragejs', '@faker-js/faker/locale/en'],
       },
-      'account-page': { import: './src/ui/3-pages/account-page/index.tsx', dependOn: 'vendors-react' },
+      'account-dashboard': { import: './src/ui/3-pages/account-dashboard/index.tsx', dependOn: 'vendors-react' },
     },
     output: {
       path: path.resolve(__dirname, 'build'),
@@ -58,9 +58,9 @@ module.exports = (env) => {
       }),
       new HtmlWebpackPlugin({
         inject: true,
-        chunks: ['vendors-localhost', 'vendors-react', 'account-page'],
-        template: 'src/ui/3-pages/account-page/index.html',
-        filename: 'pages/account-page/index.html',
+        chunks: ['vendors-localhost', 'vendors-react', 'account-dashboard'],
+        template: 'src/ui/3-pages/account-dashboard/index.html',
+        filename: 'pages/account-dashboard/index.html',
       }),
       // This plugin extracts CSS into separate files. It creates a CSS file per JS file which contains CSS. It supports On-Demand-Loading of CSS and SourceMaps.
       new MiniCssExtractPlugin({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { IAccountTileProps } from './interfaces';
-import './account-tile.css';
-import { deleteEditAccount } from '../../../../state/account-dashboard/account-list.actions';
+import './styles.css';
+import { deleteEditAccount } from '../../../../state/account-dashboard/actions';
 import { useDispatch } from 'react-redux';
 
 const AccountTile = (props: IAccountTileProps): JSX.Element => {

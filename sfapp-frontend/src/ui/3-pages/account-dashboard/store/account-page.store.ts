@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { ROOT_SAGA } from './account-page.sagas';
-import { accountListSlice } from '../../../../state/account-dashboard/account-list-view.slice';
-import { toastAlertSlice } from '../../../../state/toast-alert/toast-alert.slice';
+import { accountListSlice } from '../../../../state/account-dashboard/slice';
+import { toastAlertSlice } from '../../../../state/toast-alert/slice';
 
 const sagaMiddleware = createSagaMiddleware();
 

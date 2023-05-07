@@ -3,7 +3,7 @@ import LocalhostRestApi from '../localhost/localhost-rest-api';
 import { APIResponseNoContentType, APIResponseType } from '../services/api-response-type';
 import AccountSalesforceRemoteAction from './salesforce/account-salesforce-remote-action';
 import { IAccountBaseDTO } from './dtos/account-response-dto';
-import SalesforceContext from '../../services/salesforce/salesforce-context';
+import SalesforceContext from '../services/salesforce-context';
 
 export default class AccountAPI {
   public static getAllAccounts(): Promise<APIResponseType<IAccountBaseDTO, ISalesforceErrorDTO>> {

@@ -4,8 +4,8 @@ import { IAccountBaseDTO } from '../../api/account-api/dtos/account-response-dto
 import ISalesforceErrorDTO from '../../api/services/dtos/salesforce-error-dto';
 import { APIResponseNoContentType, APIResponseType } from '../../api/services/api-response-type';
 import { IPayloadActionType } from '../services/redux/common-action-types';
-import { showToastAlertAction } from '../toast-alert/toast-alert.actions';
-import { setListOfAccountReducer } from './account-list-view.slice';
+import { showToastAlertAction } from '../toast-alert/actions';
+import { setListOfAccountReducer } from './slice';
 import { ACCOUNT_LIST_ACTIONS } from './constants';
 
 export function* loadAllAccountsSaga() {

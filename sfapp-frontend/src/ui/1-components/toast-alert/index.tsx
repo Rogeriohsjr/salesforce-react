@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './toast-alert.css';
-import { hideToastAlertAction } from '../../../state/toast-alert/toast-alert.actions';
-import { SHOW_TOAST_MESSAGE, TOAST_MESSAGE } from '../../../state/toast-alert/toast-alert.selectors';
+import './styles.css';
+import { hideToastAlertAction } from '../../../state/toast-alert/actions';
+import { SHOW_TOAST_MESSAGE, TOAST_MESSAGE } from '../../../state/toast-alert/selectors';
 
 const AlertError = (): JSX.Element => {
   const dispatch = useDispatch();
