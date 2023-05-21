@@ -1,4 +1,4 @@
-import { IToastAlertMessage } from '../../ui/1-components/toast-alert/interfaces';
+import { IToastAlertMessage } from '../../ui/components/toast-alert/interfaces';
 
 export interface IToastAlertState {
   showAlert: boolean;

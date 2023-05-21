@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IPayloadActionType } from "../services/redux/common-action-types";
 import { ACCOUNT_STATE_DEFAULT } from "./constants";
 import { IAccountState } from "./interfaces";
-import { IAccount } from "../../ui/1-components/account-list/interfaces";
+import { IAccount } from "../../ui/components/account-list/interfaces";
 
 export const accountListSlice = createSlice({
   name: "accountListSlice",

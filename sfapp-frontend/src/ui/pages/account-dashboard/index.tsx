@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import AccountListView from '../../2-views/account-view';
+import AccountListView from '../../views/account-view';
 import accountPageStore from './store/account-page.store';
 import './index.css';
 

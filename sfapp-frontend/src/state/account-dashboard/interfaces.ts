@@ -1,4 +1,4 @@
-import { IAccount } from "../../ui/1-components/account-list/interfaces";
+import { IAccount } from "../../ui/components/account-list/interfaces";
 
 export interface IAccountState {
   listOfAccounts: IAccount[];
