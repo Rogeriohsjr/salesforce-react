@@ -8,7 +8,7 @@ import { showToastAlertAction } from '../toast-alert/actions';
 import { setListOfAccountReducer } from './slice';
 import { ACCOUNT_LIST_ACTIONS } from './constants';
 
-export function* loadAllAccountsSaga() {
+function* loadAllAccountsSaga() {
   const result: APIResponseType<IAccountBaseDTO, ISalesforceErrorDTO> = yield call(AccountAPI.getAllAccounts);
 
   if (result.isSuccess) {
@@ -18,7 +18,7 @@ export function* loadAllAccountsSaga() {
   }
 }
 
-export function* deleteAccountSaga(action: IPayloadActionType<string>) {
+function* deleteAccountSaga(action: IPayloadActionType<string>) {
   const accountId = action.payload;
   const result: APIResponseNoContentType<ISalesforceErrorDTO> = yield call(AccountAPI.deleteAccount, accountId);
 

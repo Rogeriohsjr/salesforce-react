@@ -1,144 +1,153 @@
 
+# React Folder
 
-# Approach 1
-It has all the files in one place separate by the Folder and Feature.
-
-Pros:
-- All files are centralized
-Cons:
-- All files are centralized in one place, so if we reuse the state in a different ui, that wouldn't be nice because that would be come in a spaghetti code.
-
-Is it easy to move that after?
-yes
-
-- toast-alert
-  - services
-    - interfaces.ts
-    - constants.ts
-  - state
-    - toast-alert.action.ts
-    - toast-alert.saga.ts
-    - toast-alert.selectors.ts
-    - toast-alert.slice.ts
-    - toast-alert.state.test.ts
-  - ui
-    - toast-alert.css
-    - toast-alert.tsx
-  - test
-    - toast-alert.ut.ts
-    - toast-alert.command.ts
-    - toast-alert.cmp.cy
+The intention of this folder/project:
+1. Holds all the React files and App
+2. Each Visualforce Page in our SF we will be its own App in React
+3. We should be able to easily test and build react components, without the need to deploy to salesforce every time.
 
 
-toast-alert
-- Component/Feature - Unique component, it can be reused or not.
-/ Services
-- It contains classes/constants/interfaces/types/enums to help the toast alert component to be typed and to help in the logic.
-/ state
-- It contains the state that the toast alert uses
-/ ui
-- It contains only logic for the ui, it doesn't have logic for state.
-/ test
-- It contains all the test related to that component
+# Tech Stack
+
+React, this is the framework that we are using to build our component.
+
+Typescript, we use typescript instead of pure javascript, so we have type in mostly of our app code.
+
+Redux, this is our state management
+
+Redux-Saga, this helps us to organize our code into UI, Business Logic(State, API)
+
+MirageJs, this help us to develop in localhost and test into localhost, it helps on mock the API layer that we will do with Salesforce.
 
 
-# Approach 2
-This approach separates the State from the UI.
-
-- ui
-  - components
-    - toast-alert
-      - services
-        - interfaces.ts
-        - constants.ts
-      - ui
-        - toast-alert.css
-        - toast-alert.tsx
-      - test
-        - toast-alert.ut.ts
-        - toast-alert.command.ts
-        - toast-alert.cmp.cy
-  - pages/apps
-    - account-dashboard-page
-      - store
-        - account-dashboard-page.store.ts
-        - account-dashboard-page.saga.ts
-  - view/containers
-    - account-dashboard-view
+# Folder Structure
 
 
-- state
-  - toast-alert
-      - types.ts
-      - toast-alert.action.ts
-      - toast-alert.saga.ts
-      - toast-alert.selectors.ts
-      - toast-alert.slice.ts
-      - toast-alert.state.test.ts
+Basic Standards I try to follow:
+- Keep the UI and State separate
+- Keep the API and Business Logic separate
 
 
-Things to keep in mind:
-- Separate of concern on these areas:
-- ui
-- state
-- api
-- services
-- e2e
+Flow of the Components
+
+UI -> State -> API -> SF or Mirage(Mock API)
+
+React Component -> Redux/Redux-Saga -> Typescript Code API -> SF or Mirage
 
 
-Why separate them?
+## Root Folder
 
-ui:
-- Easier to focus only on the UI part and how it looks like
-- No heavy business logic is implemented on the UI
-- Easy to test
+state
+- Contains all the States files that we use, it contains the Redux Reducer, Action, Selector and Sagas
 
-Don't do:
-- We don't call an API class from UI
+ui
+- Contains all the components that we build using react
+- This is only the UI logic, we should not have Business Logic, API Logic here.
+-- How do we know if it is a business logic or the component logic?
+
+api
+-  we should only api logic here
+- This would do a callout to miragejs or salesforce or to something else
+
+services
+- The service folder on the root means that the files inside are shared with the ui or state
+- This is more to where the logic will be, we can have a service into api because we might have a logic for the api where we want to centralize.
+- We can also have a service for state, because multiple state reuses the same logic
+
+## State folder
+
+This folder should have all the states that we have for the app, if those state is basically handled by a management state. Internal component state doesn't need to be here.
+
+### Domain state folder
+
+This folder will have all the domain state files, a domain would be like, account dashboard, contacts dashboard, account management, etc..
+
+### UI state folder
+This folder will have all the ui state, which means a state that is only for the ui, example, image an error message popup, it does needs a state because any state can actually call that popup if an error happens, and that will never do any callout(api call) or it is a domain, this is a general ui and the state is managed only for that ui to show or hide.
+
+Can a component have a Domain state and UI state?
+TBD/Research - I think it can but I think it will be more code than necessary.
+
+### Reducer(Slice), Selector, Action, Saga
+
+For the Domain and UI state folders we will have a file for Reducer, Selector, Action and Saga.
+I am also following the pattern to NOT add the name of the component into the file, the folder will tell which component is that.
+
+Think of the flow like:
+
+Component calls Action -> calls Saga -> calls Reducer -> updates State
+
+Component calls Selector -> gets State
+
+We will go over the sequence but backward(Reducer, Saga, Action).
+
+**Reducer(slice.ts)**
+- We should have no logic here, the Reducer should set the state and that is it.
+- Reducer should be very dummy, so it is easier to read
+
+Name convention:
+- In reducer section, we use verb + Domain Action + Reducer(getListOfAccountsReducer, deleteAccountReducer, refreshAccountReducer)
+- In initial state, we use a constant to set that which should be all SNAKE_UPPER_CASE
+- We always export the Reducers using Toolkit
+
 Do:
-- We focus only in UI
-- We use actions and selectors from State
-Maybe:
-- We call Services calls? Not sure
+- Reducer does set our initial state
+- Reducer does Update/Set/Change its own state
 
-state:
-  - Having a state to its own folder allows us to reuse the state if that is possible. 
-    In case we decide to reuse the state to build the same page but with different layout and allow users to choose which layout they want to use.
-  - Might be easier to Test since this is located in one place.
-  - Might be easier to change fro Redux to Thunk or to another State Management, since this is focused in one place.
-  - Might help to be used in a different UI, like React Native or other UI Framework.
+Do not:
+- Reducer should not call another reducer layer
+- Reducer should not call saga layer
+- Reducer should not call component layer
+- Reducer should not call API layer
+- Reducer should not call an Action Layer
 
-Don't do:
-  - Don't have UI? Should we say don't call UI Component?
+**Saga**
+- It is where the business logic is and where we call the api and the reducer, that is the "service" of the component.
+- Sagas can communicate with each other using actions.
+
+Name convention:
+- We do not have export in the saga function only in rootSaga
+- We set as function* all the sagas
+- We set using camelCase
+- We use verb + Domain Action + Saga(getListOfAccountsSaga, deleteAccountSaga, refreshAccountSaga)
+
 Do:
-  - We can call API layer, to get the Data
-  - We can call Service Layer to process Data
-  - We can call Reducers/Actions which set the States
-  
+- Saga can call API layer
+- Saga can call Reducer Layer that belongs to the saga domain(I believe it is one to one)
+- Saga can call a Action Layer that it is not its own(Communicate with another Saga)
 
-api:
-- Easier to add logic only for that layer
-- That domain is only for the API Domain
-- We can have logic to hold different API, like Call Salesforce or Localhost or an actual server.
+Do not:
+- Saga should not call another Saga that is not its own
+- Saga should not call another Reducer that it is not its own
+- 
 
-Don't do:
-- We don't add business logic here.
-- We don't add UI components all here.
+**Action**
+- It is very dummy and simple, we use that for the react component/ui to call any action/logic to state and reducer.
+
+Name convention:
+- We have an export
+- We set as const
+- We set using camelCase
+- We use verb + Domain Action(getListOfAccounts, deleteAccount, refreshAccount)
+
 Do:
-- We add only callouts logics on this folder
-- Mostly callouts will be by Domain
+- Action can receive the payload
+- Action has always a type, that type is linked with Saga
+
+Do not:
+- Actions does not have any logic
 
 
-services:
-  - This will have all the heavy logic or logic used many times.
-  - We will have util classes and helper classes.
+**Selectors**
 
-Don't do:
-  - We don't add UI Component here
-  - We don't add State here
-  - We don't do api calls here
-Do:
-  - We add heavy Business logic here
-  - We add common logics here
+- The purpose of a selector is to get information that is on the state/Storage
+- That could be simple or complex because we can apply logic to filter or parse specific records from the state
 
+Name convention:
+- We have an export
+- We set as const
+- We set using camelCase
+??WIP- We use verb + Domain Action(getListOfAccounts, deleteAccount, refreshAccount)
+
+Do
 

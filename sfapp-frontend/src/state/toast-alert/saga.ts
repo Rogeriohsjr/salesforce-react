@@ -4,11 +4,11 @@ import { IPayloadActionType } from '../services/redux/common-action-types';
 import ISalesforceErrorDTO from '../../api/services/dtos/salesforce-error-dto';
 import { TOAST_ALERT_ACTIONS } from './constants';
 
-export function* showToastAlertSaga(action: IPayloadActionType<ISalesforceErrorDTO>) {
+function* showToastAlertSaga(action: IPayloadActionType<ISalesforceErrorDTO>) {
   yield put(showToastAlertReducer(action.payload));
 }
 
-export function* hideToastAlertSaga() {
+function* hideToastAlertSaga() {
   yield put(hideToastAlertReducer());
 }
 

@@ -1,0 +1,85 @@
+/*!**************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/ui/components/account-list/account-tile/styles.css ***!
+  \**************************************************************************************************************************************/
+.account-tile__container{
+  border: 1px solid #9E9E9E;
+  padding: 10px;
+  width: 300px;
+  height: 80px;
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.account-tile__title {
+  font-size: 20px;
+  display: flex;
+}
+
+.account-list-of-actions {
+  display: flex;
+}
+
+/*!*************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/ui/components/account-list/styles.css ***!
+  \*************************************************************************************************************************/
+.account-list__container {
+  display: flex;
+  width: 1400px;
+  margin: auto;
+  flex-direction: column;
+}
+
+.account-list__list-of-tiles {
+  display: flex;
+  width: 1400px;
+  height: 500px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 20px;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/ui/components/toast-alert/styles.css ***!
+  \************************************************************************************************************************/
+.alert_error__container {
+  border: 1px solid red;
+  display: flex;
+  margin: auto;
+  width: 400px;
+  background: red;
+  color: white;
+  font-family: sans-serif;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+}
+
+.alert_error__message-content {
+}
+
+.alert_error__message-code {
+  display: inline-flex;
+  margin-right: 5px;
+}
+
+.alert_error__message-text {
+  display: inline-flex;
+}
+
+.alert_error__message-action {
+}
+
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/ui/pages/account-dashboard/index.css ***!
+  \************************************************************************************************************************/
+body {
+  font-family: 'Courier New', Courier, monospace;
+}
