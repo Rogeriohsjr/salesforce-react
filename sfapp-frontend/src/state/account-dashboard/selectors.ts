@@ -3,4 +3,4 @@ import { IAccountRootStore, IAccountState } from './interfaces';
 
 const getSlice = (state: IAccountRootStore): IAccountState => state.accountStore;
 
-export const getListOfAccounts = createSelector(getSlice, (slice: IAccountState) => slice.listOfAccounts);
+export const selectListOfAccounts = createSelector(getSlice, (slice: IAccountState) => slice.listOfAccounts);

@@ -3,6 +3,6 @@ import { IToastAlertState, IToastAlertStateRootStore } from './interfaces';
 
 const getSlice = (state: IToastAlertStateRootStore): IToastAlertState => state.alertStore;
 
-export const getToastMessage = createSelector(getSlice, (slice: IToastAlertState) => slice.toastMessage);
+export const selectToastMessage = createSelector(getSlice, (slice: IToastAlertState) => slice.toastMessage);
 
-export const isToastMessageVisible = createSelector(getSlice, (slice: IToastAlertState) => slice.showAlert);
+export const selectIsToastMessageVisible = createSelector(getSlice, (slice: IToastAlertState) => slice.showAlert);

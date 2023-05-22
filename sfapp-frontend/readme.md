@@ -147,8 +147,10 @@ Name convention:
 - We have an export
 - We set as const
 - We set using camelCase
-- We use verb + Domain (getListOfAccounts, deleteAccount, refreshAccount)
-- We also use question like "is" "has" "should" (isPopupVisible, hasSelectedItem)
+- We use select + Domain (selectListOfAccounts, selectListOfDeletedAccounts, selectSelectedAccount)
+- We also use question like "is" "has" "should" (selectIsPopupVisible, selectIsPageLoading, selectHasInvalidItems)
+https://redux.js.org/style-guide/#name-selector-functions-as-selectthing
+- So far we should avoid Select + Verb, try to use the select as verb
 
 Do:
 - We call the State from the Storage

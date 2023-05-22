@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllAccounts } from '../../../state/account-dashboard/actions';
-import { getListOfAccounts } from '../../../state/account-dashboard/selectors';
+import { selectListOfAccounts } from '../../../state/account-dashboard/selectors';
 import AccountTile from './account-tile';
 import './styles.css';
 
 const ListAccount = (): JSX.Element => {
-  const listOfAccount = useSelector(getListOfAccounts);
+  const listOfAccount = useSelector(selectListOfAccounts);
   const dispatch = useDispatch();
 
   useEffect(() => {
