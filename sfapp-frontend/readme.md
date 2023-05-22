@@ -140,14 +140,37 @@ Do not:
 
 **Selectors**
 
-- The purpose of a selector is to get information that is on the state/Storage
+- The purpose of a selector is to get information that is on the Storage(State)
 - That could be simple or complex because we can apply logic to filter or parse specific records from the state
 
 Name convention:
 - We have an export
 - We set as const
 - We set using camelCase
-??WIP- We use verb + Domain Action(getListOfAccounts, deleteAccount, refreshAccount)
+- We use verb + Domain (getListOfAccounts, deleteAccount, refreshAccount)
+- We also use question like "is" "has" "should" (isPopupVisible, hasSelectedItem)
 
-Do
+Do:
+- We call the State from the Storage
+- We can have parameter into the method in selectors
+
+Do not:
+- We do not call storage/state from other domain/ui that doesn't belong to the folder
+
+
+**Constants**
+
+The purpose of this file is to keep our the constants that we will have for the State.
+
+Name convention:
+- We have export in the constants that we need to
+- We use SNAKE_UPPER_CASE(TOAST_ALERT_ACTIONS, TOAST_ALERT_STATE_DEFAULT)
+
+
+**Interfaces**
+
+The purpose of this file is to centralize all the Interfaces that we use for that domain.
+
+Name convention:
+- We use I + Pascal_Case, I as Interface(IAlertToastState, IAlertToastProps)
 

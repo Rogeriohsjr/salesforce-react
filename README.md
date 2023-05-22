@@ -1,4 +1,3 @@
-:bell: This Project is not a Production ready code.
 # :rocket: React with Salesforce
 The goals of this project is to be a boiler plate for a Project in Salesforce that  uses React, Redux, Redux Toolkit, Redux-Saga and Typescript.
 We also will have a pipeline and Cypress Component and E2E Test.

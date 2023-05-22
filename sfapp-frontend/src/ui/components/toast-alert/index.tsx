@@ -2,12 +2,12 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './styles.css';
 import { hideToastAlertAction } from '../../../state/toast-alert/actions';
-import { SHOW_TOAST_MESSAGE, TOAST_MESSAGE } from '../../../state/toast-alert/selectors';
+import { isToastMessageVisible, getToastMessage } from '../../../state/toast-alert/selectors';
 
 const AlertError = (): JSX.Element => {
   const dispatch = useDispatch();
-  const toastMessage = useSelector(TOAST_MESSAGE);
-  const showToastMessage = useSelector(SHOW_TOAST_MESSAGE);
+  const toastMessage = useSelector(getToastMessage);
+  const showToastMessage = useSelector(isToastMessageVisible);
 
   if (!showToastMessage) {
     return null;
