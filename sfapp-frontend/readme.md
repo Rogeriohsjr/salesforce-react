@@ -128,7 +128,7 @@ Name convention:
 - We have an export
 - We set as const
 - We set using camelCase
-- We use verb + Domain Action(getListOfAccounts, deleteAccount, refreshAccount)
+- We use verb + Domain + Action(getListOfAccountsAction, deleteAccountAction, refreshAccountAction)
 
 Do:
 - Action can receive the payload
