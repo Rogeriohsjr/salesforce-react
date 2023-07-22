@@ -1,9 +1,7 @@
-.alert_error__container {
-  border: 1px solid red;
+.toast_alert__container {
   display: flex;
   margin: auto;
   width: 400px;
-  background: red;
   color: white;
   font-family: sans-serif;
   align-items: center;
@@ -12,6 +10,16 @@
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 5px;
+}
+
+.toast_alert--success{
+  border: 1px solid green;
+  background: green;
+}
+
+.toast_alert--error{
+  border: 1px solid red;
+  background: red;
 }
 
 .alert_error__message-content {

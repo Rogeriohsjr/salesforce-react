@@ -38,7 +38,7 @@ export default class LocalhostRestApi {
       });
   }
 
-  public static delete(pEndpoint: string, pSuccessCallBack: (value: unknown) => void, pErrorCallBack: (response: ISalesforceErrorDTO) => void): void {
+  public static delete(pEndpoint: string, pSuccessCallBack: (response: unknown) => void, pErrorCallBack: (response: ISalesforceErrorDTO) => void): void {
     // We will call function
     fetch(pEndpoint, {
       method: 'delete',

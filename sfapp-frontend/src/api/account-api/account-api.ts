@@ -4,6 +4,7 @@ import { APIResponseNoContentType, APIResponseType } from '../services/api-respo
 import AccountSalesforceRemoteAction from './salesforce/account-salesforce-remote-action';
 import { IAccountBaseDTO } from './dtos/account-response-dto';
 import SalesforceContext from '../services/salesforce-context';
+import { HandlePromiseAPI } from '../services/handle-promise-api';
 
 export default class AccountAPI {
   public static getAllAccounts(): Promise<APIResponseType<IAccountBaseDTO, ISalesforceErrorDTO>> {
@@ -16,40 +17,19 @@ export default class AccountAPI {
         LocalhostRestApi.get<IAccountBaseDTO>(url, resolve, rejected);
       }
     });
-
-    return promise
-      .then((pResponse: IAccountBaseDTO) => {
-        return {
-          successResponse: pResponse,
-          isSuccess: true,
-        };
-      })
-      .catch((response: ISalesforceErrorDTO) => ({
-        errorResponse: response,
-        isSuccess: false,
-      }));
+    return promise.then(HandlePromiseAPI.handleSuccessResponse).catch(HandlePromiseAPI.handleErrorResponse);
   }
 
   public static deleteAccount(pAccountId: string): Promise<APIResponseNoContentType<ISalesforceErrorDTO>> {
     console.log('[deleteAccount] Starts...');
     const promise = new Promise((resolve, rejected) => {
       if (SalesforceContext.isSalesforceContext()) {
-        AccountSalesforceRemoteAction.deleteAccount(pAccountId, rejected);
+        AccountSalesforceRemoteAction.deleteAccount(pAccountId, resolve, rejected);
       } else {
         let url = '/api/account/' + pAccountId;
         LocalhostRestApi.delete(url, resolve, rejected);
       }
     });
-
-    return promise
-      .then(() => {
-        return {
-          isSuccess: true,
-        };
-      })
-      .catch((response: ISalesforceErrorDTO[]) => ({
-        errorResponse: response[0],
-        isSuccess: false,
-      }));
+    return promise.then(HandlePromiseAPI.handleSuccessResponse).catch(HandlePromiseAPI.handleErrorResponse);
   }
 }

@@ -7,6 +7,7 @@ import { IPayloadActionType } from '../services/redux/common-action-types';
 import { showToastAlertAction } from '../toast-alert/actions';
 import { setListOfAccountReducer } from './slice';
 import { ACCOUNT_LIST_ACTIONS } from './constants';
+import { EnumToastTypes } from '../../ui/components/toast-alert/constants';
 
 function* loadAllAccountsSaga() {
   const result: APIResponseType<IAccountBaseDTO, ISalesforceErrorDTO> = yield call(AccountAPI.getAllAccounts);
@@ -14,7 +15,7 @@ function* loadAllAccountsSaga() {
   if (result.isSuccess) {
     yield put(setListOfAccountReducer(result.successResponse.listOfAccounts));
   } else {
-    yield put(showToastAlertAction(result.errorResponse));
+    yield put(showToastAlertAction({ type: EnumToastTypes.Error, messageCode: result.errorResponse.errorCode, messageText: result.errorResponse.message }));
   }
 }
 
@@ -23,9 +24,10 @@ function* deleteAccountSaga(action: IPayloadActionType<string>) {
   const result: APIResponseNoContentType<ISalesforceErrorDTO> = yield call(AccountAPI.deleteAccount, accountId);
 
   if (result.isSuccess) {
+    yield put(showToastAlertAction({ type: EnumToastTypes.Success, messageCode: '', messageText: 'Deleted Successfully' }));
     yield* loadAllAccountsSaga();
   } else {
-    yield put(showToastAlertAction(result.errorResponse));
+    yield put(showToastAlertAction({ type: EnumToastTypes.Error, messageCode: result.errorResponse.errorCode, messageText: result.errorResponse.message }));
   }
 }
 
