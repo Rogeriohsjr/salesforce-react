@@ -56,6 +56,11 @@ module.exports = (env) => {
       new webpack.DefinePlugin({
         'process.env.MIRAGE_ON': JSON.stringify(env.MIRAGE_ON),
       }),
+      new HtmlWebpackPlugin({
+        inject: true,
+        template: 'src/ui/pages/index/index.html',
+        filename: 'index.html',
+      }),
       // This is for the localhost
       // This create the html and add the js css into the html for us test
       new HtmlWebpackPlugin({
